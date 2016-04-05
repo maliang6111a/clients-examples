@@ -44,8 +44,10 @@ public class Client {
 			socket.setKeepAlive(true);
 			socket.setSoTimeout(40000);
 			os = socket.getOutputStream();
+
 			// 发送认证信息
 			sendMessage(Message.createAuthMessage("123", "ok"));
+
 			is = socket.getInputStream();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,6 +87,7 @@ public class Client {
 		}
 		try {
 			byte[] bs = msg.pack();
+
 			if (msg.version == Version.BUFAUTH && bs.length > 9) {
 				os.write(bs);
 				os.flush();

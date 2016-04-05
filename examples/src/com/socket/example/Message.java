@@ -13,8 +13,10 @@ public class Message {
 
 	public byte version; // 1
 
+
 	// 在写入的时候没有用到这个属性
 	// 读取的时候用到了
+
 	public int msg_len; // 4
 
 	public Object body;
@@ -29,6 +31,7 @@ public class Message {
 		byte[] buf = new byte[64 * 1024];
 		buf[pos] = version;
 		pos++;
+
 		byte[] bs = null;
 
 		if (version == Version.BUFVERSION) {
@@ -85,6 +88,7 @@ public class Message {
 			}
 		}
 		return false;
+
 	}
 
 	public static Message createAuthMessage(String authId, String authPwd) {
@@ -95,5 +99,6 @@ public class Message {
 		msg.version = Version.BUFAUTH;
 		msg.body = message;
 		return msg;
+
 	}
 }

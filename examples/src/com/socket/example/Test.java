@@ -1,6 +1,11 @@
 package com.socket.example;
 
 import java.io.IOException;
+<<<<<<< HEAD
+=======
+import java.util.Timer;
+import java.util.TimerTask;
+>>>>>>> e9b924c0b3e4f369ffcfdf30da89c9875867c849
 
 import com.socket.example.Client.HandlerCallBack;
 
@@ -28,11 +33,13 @@ public class Test {
 				}
 			}
 		});
+
 		/*
 		 * new Timer().schedule(new TimerTask() {
 		 * 
 		 * @Override public void run() { client.sendMessage(msg); } }, 1000, 2000);
 		 */
+
 
 	}
 }

@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <title>EIO Latency</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>EIO Latency <span id="latency"></span></h1>
+    <h2 id="transport">(connecting)</h2>
+    <canvas id="chart" height="200"></canvas>
+
+	<script src="base64.js" charset="utf-8"></script>
+	 <script src="engine.io.js" charset="utf-8"></script>
+	<script>
+		//var socket = Socket("http://127.0.0.1:9997",null)
+		var socket = new eio.Socket("http://127.0.0.1:9998",{transports:["polling", "websocket"]});
+		socket.on("open",function(){
+			console.log("connection is opened!");
+			sendAuth();
+			
+			setInterval(function(){
+				var msg = '{"sender":123,"receiver":123,"timestamp":0,"msgid":0,"content":"你们是傻逼"}';
+				send(msg)
+				//send(sendmsg)
+			}, 5000);
+		})
+		
+		socket.on("message",function(msg){
+			console.log(decoder(msg))
+		})
+			
+		socket.on("close",function() {
+			console.log("closed");
+		})
+		
+		function send(msg) {
+			socket.send(encoder(msg));
+		}
+		
+		//认证信息
+		function sendAuth() {
+			var auth='{"authId":"123","authPwd":"ok"}';
+			//console.log("send auth msg!")
+			socket.send(encoder(auth))
+		}
+		
+		function encoder(msg) {
+			return BASE64.encoder(msg);
+		}
+		
+		function decoder(base64Str) {
+			var unicode = BASE64.decoder(base64Str)
+			var str = '';  
+			for(var i = 0 , len =  unicode.length ; i < len ;++i){  
+			  str += String.fromCharCode(unicode[i]);  
+			} 
+			return str
+		}
+		
+		
+		
+	</script>
+  </body>
+</html>

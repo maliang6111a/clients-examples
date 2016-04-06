@@ -1,11 +1,10 @@
 package com.socket.example;
 
 import java.io.IOException;
-<<<<<<< HEAD
-=======
+
 import java.util.Timer;
 import java.util.TimerTask;
->>>>>>> e9b924c0b3e4f369ffcfdf30da89c9875867c849
+
 
 import com.socket.example.Client.HandlerCallBack;
 

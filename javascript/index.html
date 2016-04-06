@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
   <head>
+	<meta charset="UTF-8"> 
     <title>EIO Latency</title>
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -13,33 +14,21 @@
 	 <script src="engine.io.js" charset="utf-8"></script>
 	<script>
 		//var socket = Socket("http://127.0.0.1:9997",null)
-<<<<<<< HEAD
 		var socket = new eio.Socket("http://127.0.0.1:9998",{transports:["polling", "websocket"]});
-=======
-		var socket = new eio.Socket("http://192.168.0.114:9998",{transports:["polling", "websocket"]});
->>>>>>> e9b924c0b3e4f369ffcfdf30da89c9875867c849
 		socket.on("open",function(){
 			console.log("connection is opened!");
 			sendAuth();
 			
+			
 			setInterval(function(){
-<<<<<<< HEAD
-				var msg = '{"sender":123,"receiver":123,"timestamp":0,"msgid":0,"content":"你们是傻逼"}';
+				var msg = '{"sender":123,"receiver":236,"timestamp":0,"msgid":0,"content":"你们是傻逼"}';
 				send(msg)
-				//send(sendmsg)
-=======
-				send("你们都傻逼")
->>>>>>> e9b924c0b3e4f369ffcfdf30da89c9875867c849
 			}, 5000);
+			
 		})
 		
 		socket.on("message",function(msg){
-<<<<<<< HEAD
 			console.log(decoder(msg))
-=======
-			var msg=decoder(msg)
-			console.log(msg)
->>>>>>> e9b924c0b3e4f369ffcfdf30da89c9875867c849
 		})
 			
 		socket.on("close",function() {
@@ -47,38 +36,23 @@
 		})
 		
 		function send(msg) {
-<<<<<<< HEAD
-			socket.send(encoder(msg));
-=======
-			var tmp = BASE64.encoder(msg)
-			console.log("send msg ",tmp)
-			socket.send(tmp);
->>>>>>> e9b924c0b3e4f369ffcfdf30da89c9875867c849
+			//var test = "你们好";
+			var encoderStr = encoder(msg);
+			socket.send(encoderStr)
 		}
 		
 		//认证信息
 		function sendAuth() {
 			var auth='{"authId":"123","authPwd":"ok"}';
-<<<<<<< HEAD
-			//console.log("send auth msg!")
-			socket.send(encoder(auth))
+			send(auth)
 		}
 		
 		function encoder(msg) {
-			return BASE64.encoder(msg);
-=======
-			console.log("send auth msg!")
-			socket.send(BASE64.encoder(auth))
->>>>>>> e9b924c0b3e4f369ffcfdf30da89c9875867c849
+			return base64encode(utf16to8(msg));
 		}
 		
 		function decoder(base64Str) {
-			var unicode = BASE64.decoder(base64Str)
-			var str = '';  
-			for(var i = 0 , len =  unicode.length ; i < len ;++i){  
-			  str += String.fromCharCode(unicode[i]);  
-			} 
-			return str
+			return  utf8to16(base64decode(base64Str));
 		}
 		
 		

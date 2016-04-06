@@ -108,7 +108,9 @@ public class Message {
 		imsg.setContent("ping");
 		Message msg = new Message();
 		// 这个地方没啥用，现在这样，方便以后扩展心跳协议
-		msg.version = Version.HEATBEAT;
+		// Version.HEATBEAT
+		// 目前协议服务端没有实现
+		msg.version = Version.BUFVERSION;
 		msg.body = imsg;
 		return msg;
 	}

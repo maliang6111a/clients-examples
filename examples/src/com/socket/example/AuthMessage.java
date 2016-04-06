@@ -6,6 +6,13 @@ import java.util.Arrays;
 
 public class AuthMessage implements Serializable {
 
+	/**
+	 * 
+	 * @date 2016年4月6日 下午12:09:50
+	 * @author maliang
+	 */
+	private static final long serialVersionUID = -9194308717326541891L;
+
 	private String authId;
 	private String authPwd;
 
@@ -29,9 +36,6 @@ public class AuthMessage implements Serializable {
 			pos += idbs.length;
 			System.arraycopy(pwdbs, 0, buf, pos, pwdbs.length);
 			byte[] tmp = Arrays.copyOf(buf, 8 + idbs.length + pwdbs.length);
-			for (int i = 0; i < tmp.length; i++) {
-				System.out.print(tmp[i] + " ");
-			}
 			return tmp;
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

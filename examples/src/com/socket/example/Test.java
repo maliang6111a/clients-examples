@@ -2,28 +2,16 @@ package com.socket.example;
 
 import java.io.IOException;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-
 import com.socket.example.Client.HandlerCallBack;
 
 public class Test {
 
 	public static void main(String[] args) throws IOException {
 
-		IMMessage imsg = new IMMessage();
-		imsg.sender = 123;
-		imsg.receiver = 123;
-		imsg.timestamp = 123;
-		imsg.msgLocalID = 123;
-		imsg.content = "≤‚ ‘≤‚ ‘≤‚ ‘";
-
 		final Message msg = new Message();
 		msg.version = Version.BUFVERSION;
-		msg.body = imsg;
 
-		final Client client = Client.Builder().connection("127.0.0.1", 9997).startRead(new HandlerCallBack() {
+		final Client client = Client.Builder("236", "ok").connection("127.0.0.1", 9997).startHeatBeat().startRead(new HandlerCallBack() {
 			@Override
 			public void handler(Message msg) {
 				if (msg.version == Version.BUFVERSION && msg != null && msg.body != null) {
@@ -36,9 +24,13 @@ public class Test {
 		/*
 		 * new Timer().schedule(new TimerTask() {
 		 * 
-		 * @Override public void run() { client.sendMessage(msg); } }, 1000, 2000);
+		 * @Override public void run() { IMMessage imsg = new IMMessage(); imsg.sender = 234; imsg.receiver = 123; imsg.timestamp = 123; imsg.msgLocalID = 123; imsg.content = " «≤ª «’“≥È...." +
+		 * UUID.randomUUID(); msg.body = imsg;
+		 * 
+		 * client.sendMessage(msg); }
+		 * 
+		 * }, 1000, 2000);
 		 */
-
 
 	}
 }

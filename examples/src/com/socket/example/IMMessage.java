@@ -2,13 +2,19 @@ package com.socket.example;
 
 import java.util.Arrays;
 
-public class IMMessage {
+public class IMMessage implements Protocol {
+	/**
+	 * @date 2016年4月6日 下午12:09:14
+	 */
+	private static final long serialVersionUID = 6760064746333057698L;
+
 	public long sender; // 8
 	public long receiver; // 8
 	public int timestamp; // 4
 	public int msgLocalID; // 4
 	public String content;
 
+	@Override
 	public byte[] pack() {
 		int pos = 0;
 		byte[] buf = new byte[64 * 1024];

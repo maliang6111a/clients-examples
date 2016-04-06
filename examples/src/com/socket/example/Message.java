@@ -5,6 +5,8 @@ import java.util.Arrays;
 class Version {
 	public static final int BUFVERSION = 1;
 	public static final int BUFAUTH = 3;
+
+	public static final int HEATBEAT = 4; // 心跳信息
 }
 
 public class Message {
@@ -12,7 +14,6 @@ public class Message {
 	public static final int HEAD_SIZE = 5;
 
 	public byte version; // 1
-
 
 	// 在写入的时候没有用到这个属性
 	// 读取的时候用到了
@@ -34,7 +35,8 @@ public class Message {
 
 		byte[] bs = null;
 
-		if (version == Version.BUFVERSION) {
+		// 心跳协议暂时不分开定义
+		if (version == Version.BUFVERSION || version == Version.HEATBEAT) {
 			IMMessage im = (IMMessage) body;
 			bs = im.pack();
 		} else if (version == Version.BUFAUTH) {
@@ -101,4 +103,16 @@ public class Message {
 		return msg;
 
 	}
+
+	public static Message createHeatBeatMessage() {
+		IMMessage imsg = new IMMessage();
+		imsg.setSender(-1);
+		imsg.setReceiver(-1);
+		imsg.setContent("ping");
+		Message msg = new Message();
+		msg.version = Version.BUFVERSION;
+		msg.body = imsg;
+		return msg;
+	}
+
 }

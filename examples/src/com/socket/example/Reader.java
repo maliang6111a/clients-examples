@@ -30,7 +30,7 @@ public class Reader implements Runnable {
 				}
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.exit(-1);
 		}
 	}
 

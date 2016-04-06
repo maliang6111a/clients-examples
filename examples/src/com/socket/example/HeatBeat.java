@@ -15,7 +15,6 @@ public class HeatBeat extends TimerTask {
 		if (client == null || client.getOs() == null) {
 			return;
 		}
-		System.out.println("·¢ËÍĞÄÌø.....");
 		client.sendMessage(Message.createHeatBeatMessage());
 	}
 }

@@ -8,7 +8,6 @@ public class AuthMessage implements Serializable {
 
 	/**
 	 * 
-	 * @date 2016年4月6日 下午12:09:50
 	 * @author maliang
 	 */
 	private static final long serialVersionUID = -9194308717326541891L;

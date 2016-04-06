@@ -5,11 +5,8 @@ import java.nio.ByteOrder;
 
 public class BytePacket {
 	static public void writeInt64(long v, byte[] dst, int pos) {
-		// 声明字节缓冲区
 		ByteBuffer b = ByteBuffer.allocate(8);
-		// 检索字节顺序
 		b.order(ByteOrder.BIG_ENDIAN);
-		// 写入值
 		b.putLong(v);
 		byte[] t = b.array();
 		System.arraycopy(t, 0, dst, pos, t.length);

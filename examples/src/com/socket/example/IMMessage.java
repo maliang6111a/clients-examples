@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 public class IMMessage implements Protocol {
 	/**
-	 * @date 2016年4月6日 下午12:09:14
 	 */
 	private static final long serialVersionUID = 6760064746333057698L;
 

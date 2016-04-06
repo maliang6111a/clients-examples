@@ -5,8 +5,7 @@ import java.util.Arrays;
 class Version {
 	public static final int BUFVERSION = 1;
 	public static final int BUFAUTH = 3;
-
-	public static final int HEATBEAT = 4; // ĞÄÌøĞÅÏ¢
+	public static final int HEATBEAT = 4;
 }
 
 public class Message {
@@ -14,9 +13,6 @@ public class Message {
 	public static final int HEAD_SIZE = 5;
 
 	public byte version; // 1
-
-	// ÔÚĞ´ÈëµÄÊ±ºòÃ»ÓĞÓÃµ½Õâ¸öÊôĞÔ
-	// ¶ÁÈ¡µÄÊ±ºòÓÃµ½ÁË
 
 	public int msg_len; // 4
 
@@ -35,7 +31,6 @@ public class Message {
 
 		byte[] bs = null;
 
-		// ĞÄÌøĞ­ÒéÔİÊ±²»·Ö¿ª¶¨Òå
 		if (version == Version.BUFVERSION || version == Version.HEATBEAT) {
 			IMMessage im = (IMMessage) body;
 			bs = im.pack();
@@ -106,11 +101,14 @@ public class Message {
 
 	public static Message createHeatBeatMessage() {
 		IMMessage imsg = new IMMessage();
+
+		// æœåŠ¡ç«¯é»˜è®¤ å‘é€è·Ÿæ¥æ”¶ID<=-1ä¸ºå¿ƒè·³ä¿¡æ¯
 		imsg.setSender(-1);
 		imsg.setReceiver(-1);
 		imsg.setContent("ping");
 		Message msg = new Message();
-		msg.version = Version.BUFVERSION;
+		// è¿™ä¸ªåœ°æ–¹æ²¡å•¥ç”¨ï¼Œç°åœ¨è¿™æ ·ï¼Œæ–¹ä¾¿ä»¥åæ‰©å±•å¿ƒè·³åè®®
+		msg.version = Version.HEATBEAT;
 		msg.body = imsg;
 		return msg;
 	}

@@ -8,7 +8,7 @@ import java.util.Timer;
 
 public class Client {
 
-	// ÏûÏ¢´¦Àí»Øµ÷º¯Êı
+	// æ¶ˆæ¯å¤„ç†å›è°ƒå‡½æ•°
 	public interface HandlerCallBack {
 		public void handler(Message msg);
 	}
@@ -25,9 +25,9 @@ public class Client {
 
 	private int maxConn = 5;// 5
 
-	private int timeOut = 10 * 1000; // Ä¬ÈÏ³¬Ê±Ê±¼ä40s
+	private int timeOut = 10 * 1000; // è¶…æ—¶æ—¶é—´
 
-	private int heatBeat = 20 * 1000;// Ä¬ÈÏĞÄÌøÊ±¼ä30s
+	private int heatBeat = 20 * 1000;// Ä¬å¿ƒè·³é—´éš”æ—¶é—´
 
 	private Socket socket = null;
 
@@ -43,12 +43,10 @@ public class Client {
 	}
 
 	/**
-	 * ´«µİÈÏÖ¤ÓÃ»§¸úÃÜÂë
 	 * 
 	 * @param authId
 	 * @param authPwd
 	 * @return
-	 * @date 2016Äê4ÔÂ6ÈÕ ÏÂÎç12:40:12
 	 * @author maliang
 	 */
 	public static Client Builder(String authId, String authPwd) {
@@ -56,12 +54,10 @@ public class Client {
 	}
 
 	/**
-	 * ÉèÖÃĞÄÌø¼ä¸ôÊ±¼ä
 	 * 
 	 * @param hb
-	 *            Ãë
+	 *            ç§’
 	 * @return
-	 * @date 2016Äê4ÔÂ6ÈÕ ÏÂÎç12:16:43
 	 * @author maliang
 	 */
 	public Client setHeatBeat(int hb) {
@@ -70,12 +66,10 @@ public class Client {
 	}
 
 	/**
-	 * ÉèÖÃ³¬Ê±Ê±¼ä
 	 * 
 	 * @param to
-	 *            Ãë
+	 *            ç§’
 	 * @return
-	 * @date 2016Äê4ÔÂ6ÈÕ ÏÂÎç12:16:57
 	 * @author maliang
 	 */
 	public Client setTimeOut(int to) {
@@ -91,11 +85,10 @@ public class Client {
 		try {
 			socket = new Socket(HOST, PORT);
 			socket.setKeepAlive(true);
-			// ³¬Ê±Ê±¼äÄ¬ÈÏ
 			socket.setSoTimeout(timeOut * 1000);
 			os = socket.getOutputStream();
 
-			// ·¢ËÍÈÏÖ¤ĞÅÏ¢
+			// å‘é€è®¤è¯ä¿¡æ¯
 			sendMessage(Message.createAuthMessage(this.authId, this.authPwd));
 
 			is = socket.getInputStream();
@@ -105,9 +98,7 @@ public class Client {
 		return this;
 	}
 
-	// ÖØÁ¬»úÖÆ
-	// ÏÂ´ÎÁ¬½Ó¼ä¸ôÊ±¼ä s
-	// ×Ü¼Æ¿ÉÒÔÖØÁ¬µÄ´ÎÊı
+	// é‡è¿è®¾ç½®
 	// TODO
 	public Client reConnectionSet(int nextConn, int maxConn) {
 		this.nextConn = nextConn;
@@ -115,7 +106,7 @@ public class Client {
 		return this;
 	}
 
-	// Æô¶¯Ïß³Ì¶ÁÈ¡ĞÅÏ¢
+	// æ¶ˆæ¯è¯»å–
 	public Client startRead(final HandlerCallBack back) {
 
 		try {
@@ -133,7 +124,7 @@ public class Client {
 		return this;
 	}
 
-	// ĞÅÏ¢·¢ËÍ
+	// æ¶ˆæ¯å‘é€
 	public void sendMessage(Message msg) {
 		if (socket == null || os == null) {
 			return;

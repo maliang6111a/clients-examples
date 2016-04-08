@@ -11,7 +11,7 @@ public class Test {
 		final Message msg = new Message();
 		msg.version = Version.BUFVERSION;
 
-		final Client client = Client.Builder("236", "ok").connection("127.0.0.1", 9997).startHeatBeat().startRead(new HandlerCallBack() {
+		final Client client = Client.Builder("123", "ok").connection("127.0.0.1", 9996).startHeatBeat().startRead(new HandlerCallBack() {
 			@Override
 			public void handler(Message msg) {
 				if (msg.version == Version.BUFVERSION && msg != null && msg.body != null) {
@@ -24,7 +24,7 @@ public class Test {
 		/*
 		 * new Timer().schedule(new TimerTask() {
 		 * 
-		 * @Override public void run() { IMMessage imsg = new IMMessage(); imsg.sender = 234; imsg.receiver = 123; imsg.timestamp = 123; imsg.msgLocalID = 123; imsg.content = "ÊÇ²»ÊÇÕÒ³é...." +
+		 * @Override public void run() { IMMessage imsg = new IMMessage(); imsg.sender = 234; imsg.receiver = 123; imsg.timestamp = 123; imsg.msgLocalID = 123; imsg.content = "ï¿½Ç²ï¿½ï¿½ï¿½ï¿½Ò³ï¿½...." +
 		 * UUID.randomUUID(); msg.body = imsg;
 		 * 
 		 * client.sendMessage(msg); }

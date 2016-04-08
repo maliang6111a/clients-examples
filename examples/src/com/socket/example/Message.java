@@ -77,7 +77,7 @@ public class Message {
 
 			pos += 4;
 			try {
-				im.setContent(new String(data, pos, data.length - 29, "UTF-8"));
+				im.setContent(new String(data, pos, msg_len - 24, "UTF-8"));
 				this.body = im;
 				return true;
 			} catch (Exception e) {

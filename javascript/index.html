@@ -14,21 +14,23 @@
 	 <script src="engine.io.js" charset="utf-8"></script>
 	<script>
 		//var socket = Socket("http://127.0.0.1:9997",null)
-		var socket = new eio.Socket("http://127.0.0.1:9998",{transports:["polling", "websocket"]});
+		var socket = new eio.Socket("http://127.0.0.1:9997",{transports:["polling", "websocket"]});
 		socket.on("open",function(){
 			console.log("connection is opened!");
 			sendAuth();
-			
+			setInterval(function(){
+				socket.ping()
+			},15000)
 			
 			setInterval(function(){
-				var msg = '{"sender":123,"receiver":236,"timestamp":0,"msgid":0,"content":"你们是傻逼"}';
+				var msg = '{"sender":123,"receiver":123,"timestamp":0,"msgid":0,"content":"我们都傻逼,968254"}';
 				send(msg)
-			}, 5000);
+			}, 500);
 			
 		})
 		
 		socket.on("message",function(msg){
-			console.log(decoder(msg))
+			console.log("接收: ",decoder(msg))
 		})
 			
 		socket.on("close",function() {
@@ -38,7 +40,9 @@
 		function send(msg) {
 			//var test = "你们好";
 			var encoderStr = encoder(msg);
+			console.log("send : ",msg)
 			socket.send(encoderStr)
+			//socket.sendText(encoderStr)
 		}
 		
 		//认证信息
